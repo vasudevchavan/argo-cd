@@ -6,6 +6,12 @@ metadata:
   labels:
     app: sampleapp
 spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: sampleapp
@@ -14,13 +20,6 @@ spec:
       labels:
         app: sampleapp
     spec:
-      replicas: 2
-      strategy: 
-        type: RollingUpdate
-      updateStrategy:
-        rollingUpdate:
-          maxSurge: 1
-          maxUnavailable: 1
       restartPolicy: Always
       containers:
       - name: sampleapp
