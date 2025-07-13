@@ -1,0 +1,10 @@
+---
+global:
+  image:
+    repository: argoproj/argocd
+    tag: "v2.6.6"
+  rbac:
+    create: true
+  server:
+    extraArgs:
+      - --insecure
