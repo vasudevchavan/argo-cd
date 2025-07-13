@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: sampleapp
-        image: docker.io/vasudevdchavan/rhel9:9.5.3
+        image: docker.io/vasudevdchavan/rhel9:9.5.4
         resources:
           limits:
             memory: "128Mi"
