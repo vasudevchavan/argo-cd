@@ -2,16 +2,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: manualsync-example-app
+  name: autosync-example-app
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'https://github.com/vasudevchavan/argo-cd.git'
     targetRevision: HEAD
-    path: '1-example'
+    path: '1example'
   destination:
     server: 'https://kubernetes.default.svc'
+    namespace: sampleapp
   syncPolicy:
     automated:
       prune: true

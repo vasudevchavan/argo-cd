@@ -9,6 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/vasudevchavan/argo-cd.git'
     targetRevision: HEAD
-    path: '1-example'
+    path: '1example'
   destination:
     server: 'https://kubernetes.default.svc'
+    namespace: sampleapp
