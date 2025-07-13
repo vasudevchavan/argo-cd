@@ -37,5 +37,3 @@ else
 fi
 
 
-# Command to get argocd initial admin password:
-#oc -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
