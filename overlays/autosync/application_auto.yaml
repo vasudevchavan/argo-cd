@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/vasudevchavan/argo-cd.git'
     targetRevision: HEAD
-    path: 'autosync'
+    path: 'overlays/autosync'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: sampleapp

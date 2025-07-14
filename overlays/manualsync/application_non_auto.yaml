@@ -9,7 +9,8 @@ spec:
   source:
     repoURL: 'https://github.com/vasudevchavan/argo-cd.git'
     targetRevision: HEAD
-    path: 'manualsync'
+    path: 'overlays/manualsync'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: sampleapp
+  
