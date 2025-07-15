@@ -1,7 +1,7 @@
-📦 Argo CD GitOps Repository
+# 📦 Argo CD GitOps Repository
 This repository contains Kubernetes manifests, Kustomize overlays, and configuration to manage applications via Argo CD in a GitOps workflow. Ideal for deploying modern apps with declarative infrastructure.
 
-🚀 Quickstart
+## 🚀 Quickstart
 Regular way to install Argo CD into your cluster (if not already installed):
 
 ```
@@ -11,7 +11,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 This Bash script automates the installation and setup of essential DevOps tools: Helm, Terraform, Podman (or Docker), ArgoCD CLI, Kustomize, and ArgoCD itself (using Terraform). It checks for existing installations and installs only what’s missing or malfunctioning.
 
-📦 What It Does:
+## 📦 What It Does:
 
   Installs Helm (with verification).
   Installs Terraform using brew.
@@ -21,13 +21,13 @@ This Bash script automates the installation and setup of essential DevOps tools:
   Deploys ArgoCD using Terraform configurations found in a local terraform/ directory.
   Verifies successful installations and deployments.
 
-🧰 Requirements Before running the script, ensure:
+## 🧰 Requirements Before running the script, ensure:
 
   macOS with Homebrew (brew) installed.
   kubectl installed and configured (required for ArgoCD verification).
   A valid terraform/ directory containing ArgoCD infrastructure configuration.
 
-🚀 How to Use
+## 🚀 How to Use
   Clone your infrastructure repo or place a terraform/ directory containing ArgoCD configs in the same folder as this script.
 
 Run the script:
@@ -38,13 +38,13 @@ chmod +x setup.sh
 ```
 The script is idempotent — it only installs missing components and safely skips those already present and functional.
 
-🛑 Error Handling
+## 🛑 Error Handling
 If any installation step fails, the script will print an error and exit immediately. Examples:
 Missing kubectl results in a hard exit.
 A missing terraform/ directory will abort the ArgoCD deployment.
 
 
-📁 Directory Structure
+## 📁 Directory Structure
 
 ```
 your-project/
@@ -52,20 +52,20 @@ your-project/
 └── terraform/       # <-- Your Terraform configs for ArgoCD
 ```
 
-✅ Verifications Performed
+## ✅ Verifications Performed
   Validates Helm installation by checking version output.
   Confirms Podman or Docker availability.
   Verifies ArgoCD pods are running via kubectl.
 
-🔄 Reusability
+## 🔄 Reusability
   To skip ArgoCD deployment, modify this line in the script:
 
 ```
 INSTALL_ARGOCD=false
 ```
 
+## Login to Argo CD UI:
 
-Login to Argo CD UI:
 Port‑forward:
 ```
 kubectl port-forward svc/argocd-server -n argocd 8081:443
@@ -77,7 +77,7 @@ CLI login:
 argocd login localhost:8081
 ```
 
-App-of-Apps pattern supported via Kustomize overlays under applications/.
+## App-of-Apps pattern supported via Kustomize overlays under applications/.
 
 🗂️ Structure
 ```
@@ -92,32 +92,50 @@ App-of-Apps pattern supported via Kustomize overlays under applications/.
 ```
 
 
-🧩 Deployment Flow
-Define base Application (App-of-Apps) in applications/base.
-Create environment overlays to customize path, target cluster/namespace, syncPolicies.
-Push changes, and Argo CD will:
+## 🧩 Deployment Flow
 
-Detect new commits
-Render manifests via Kustomize/Helm
-Sync resources into your cluster(s)
+  Define base Application (App-of-Apps) in applications/base.
+  Create overlays to customize path, target cluster/namespace, syncPolicies.
+  Push changes, and Argo CD will:
+  Detect new commits
+  Render manifests via Kustomize/Helm
+  Sync resources into your cluster(s)
 
-⚙️ Features
+## Demo1
+Manually sync images placed in docker register.
+```
+│  ├─ overlays/
+│     ├─ manualsync/          # Application with manualsync
+```
+
+## Demo2
+Auto Sync images placed in docker register.
+```
+│  ├─ overlays/
+│     ├─ autosync/          # Application with AutoSync  
+```
+
+
+## ⚙️ Features
+
 🔄 Kustomize overlays for multi‑env customization.
 📌 Support for ArgoCD sync policies (Auto or Manual).
 🔒 Optional imagePullSecrets/Helm values injection.
 🛠️ CI/CD integration ready (GitHub Actions workflow recommended).
 🌐 App-of-Apps pattern for modular pipeline and multi-cluster deployments.
 
-🧑‍💻 Usage Tips
+## 🧑‍💻 Usage Tips
+
 Use namePrefix or nameSuffix for environment isolation via overlays.
 Apply patchesStrategicMerge (Kustomize) to add imagePullSecrets, imagePullPolicy.
 Ensure Kustomize build runs before kubectl apply when using Helm charts.
 Consider argocd app diff to preview changes before syncing live.
 
-🧭 Where to Go Next
+## 🧭 Where to Go Next
+
 Check Argo CD documentation for detailed guides.
 Learn about App-of-Apps, multi-cluster GitOps, and sync policies.
 Enhance your pipeline with GitHub Actions + Kustomize + ArgoCD.
 
-📄 License
+## 📄 License
 This project is licensed under the MIT license. See the LICENSE file for details.
